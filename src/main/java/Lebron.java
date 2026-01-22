@@ -71,7 +71,15 @@ public class Lebron {
                     System.out.println(inputlist.get(inputlist.size() - 1));
                     System.out.println("Now you have " + inputlist.size() + " tasks in the list.");
 
-                } else {
+                } else if (input1.startsWith("delete")) {
+                    int index = Integer.parseInt(input1.replaceAll(".*?(\\d+)$", "$1")) - 1;
+                    System.out.println("Noted, I've removed this task:");
+                    System.out.println(inputlist.get(index));
+                    inputlist.remove(index);
+                    System.out.println("Now you have " + inputlist.size() + " tasks in the list.");
+
+                }
+                else {
                     throw new LebronException("No valid task was created");
                 }
                 System.out.println("_".repeat(60));
