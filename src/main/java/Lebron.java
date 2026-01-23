@@ -80,7 +80,7 @@ public class Lebron {
 
                 }
                 else {
-                    throw new LebronException("No valid task was created");
+                    throw new LebronException("No valid task was created, oh no!");
                 }
                 System.out.println("_".repeat(60));
             }
