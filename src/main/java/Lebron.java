@@ -1,3 +1,5 @@
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
@@ -8,7 +10,14 @@ public class Lebron {
         List<Task> inputlist = new ArrayList<>();
         System.out.println("_".repeat(60));
         System.out.println("Hello from Lebron!");
-        System.out.println("What can I do for you?");
+        System.out.println("Here's the current data : ");
+        String filePath = "./data/lebron.txt";
+        try {
+            FileReadingDemo.printFileContents(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, creating file for the user");
+            File f = new File(filePath);
+        }
         System.out.println("_".repeat(60));
         Scanner sc = new Scanner(System.in);
         String input1 = "";
