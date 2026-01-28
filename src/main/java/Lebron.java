@@ -1,11 +1,16 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
 
+
 public class Lebron {
+
+
     public static void main(String[] args) {
         List<Task> inputlist = new ArrayList<>();
         System.out.println("_".repeat(60));
@@ -18,6 +23,13 @@ public class Lebron {
             System.out.println("File not found, creating file for the user");
             File f = new File(filePath);
         }
+
+
+
+
+
+
+
         System.out.println("_".repeat(60));
         Scanner sc = new Scanner(System.in);
         String input1 = "";
@@ -55,6 +67,14 @@ public class Lebron {
                     System.out.println("Got it. I've added this task:");
                     System.out.println(inputlist.get(inputlist.size() - 1));
                     System.out.println("Now you have " + inputlist.size() + " tasks in the list.");
+                    String textToAdd = "T | 0 | " + name + "\n";
+                    try {
+                        FileWritingDemo.writeToFile(filePath, textToAdd);
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
+
+
                 } else if (input1.startsWith("deadline")) {
                     String[] parts = input1.substring(9).split("/by");
                     String name = parts[0].trim();
@@ -106,5 +126,6 @@ public class Lebron {
 
     }
 }
+
 
 
