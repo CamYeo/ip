@@ -9,7 +9,7 @@ public class FileWritingDemo {
 
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        fw.write(textToAdd);
+        fw.write(textToAdd); //adds text directly to txt file
         fw.close();
     }
 
@@ -38,6 +38,8 @@ public class FileWritingDemo {
         fw.close();
     }
 
+
+    // Follows convention to strong string in txt format
     private static String toStorageString(Task t) {
         String done = (t.status == 1) ? "1" : "0";
 

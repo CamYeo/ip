@@ -9,6 +9,7 @@ public class Task {
         this.status = 0;
     }
 
+    // Uses status 1 and 0 to Mark Status
     public void mark() {
         this.status = 1;
     }
