@@ -74,6 +74,15 @@ public class Lebron {
                     ui.showMessage(removed.toString());
                     ui.showMessage("Now you have " + tasks.size() + " tasks in the list.");
 
+                } else if (cmd.equals("find")) {
+                    String keyword = Parser.parseFind(input);
+
+                    ui.showMessage("Here are the matching tasks in your list:");
+                    java.util.List<Task> matches = tasks.findMatches(keyword);
+
+                    for (int i = 0; i < matches.size(); i++) {
+                        ui.showMessage((i + 1) + ". " + matches.get(i));
+                    }
                 } else {
                     throw new LebronException("No valid task was created, oh no!");
                 }
