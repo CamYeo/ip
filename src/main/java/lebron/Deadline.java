@@ -39,13 +39,14 @@ public class Deadline extends Task {
         return null; // unable to parse
     }
 
-    // For saving to file
+    // For saving to txt file
     public String toStorageString() {
         String byStr = (by == null) ? rawBy : by.toString();
         return "D | " + status + " | " + name + " | " + byStr;
     }
 
     @Override
+    // Override normal toString method
     public String toString() {
         if (by == null) {
             return "[D]" + super.toString() + " (by: " + rawBy + ")";

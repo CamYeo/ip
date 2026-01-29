@@ -9,12 +9,15 @@ public class Ui {
         System.out.println("_".repeat(60));
     }
 
+
+    // Played on intro
     public void showWelcome() {
         showLine();
-        System.out.println("Hello from lebron.Lebron!");
+        System.out.println("Hello from Lebron!");
         showLine();
     }
 
+    // Played on exit
     public void showBye() {
         showLine();
         System.out.println("Bye. Hope to see you again soon!");
@@ -22,7 +25,7 @@ public class Ui {
     }
 
     public String readCommand() {
-        return sc.nextLine();
+        return sc.nextLine(); //reads using scanner
     }
 
     public void showMessage(String msg) {
@@ -30,6 +33,7 @@ public class Ui {
     }
 
     public void showList(TaskList tasks) {
+        // Prints the list
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println((i + 1) + ". " + tasks.get(i));
         }

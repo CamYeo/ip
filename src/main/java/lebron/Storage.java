@@ -12,10 +12,10 @@ public class Storage {
     }
 
     public List<Task> load() throws FileNotFoundException {
-        return FileReadingDemo.loadTasks(filePath);
+        return FileReadingDemo.loadTasks(filePath); // loads file from filepath
     }
 
     public void save(TaskList tasks) throws IOException {
-        FileWritingDemo.writeAllTasks(filePath, tasks.asList());
+        FileWritingDemo.writeAllTasks(filePath, tasks.asList());  // writes arraylist into filepath
     }
 }

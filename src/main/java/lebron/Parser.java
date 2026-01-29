@@ -12,7 +12,7 @@ public class Parser {
             if (idx < 0) throw new NumberFormatException();
             return idx;
         } catch (NumberFormatException e) {
-            throw new LebronException("Please provide a valid task number.");
+            throw new LebronException("Please provide a valid task number."); // Catches poor inpit from user
         }
     }
 
