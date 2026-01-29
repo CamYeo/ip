@@ -1,3 +1,5 @@
+package lebron;
+
 public class Parser {
 
     public static String getCommandWord(String input) {
@@ -20,7 +22,7 @@ public class Parser {
         if (parts.length < 2) throw new LebronException("Usage: deadline <desc> /by <date>");
         String desc = parts[0].trim();
         String by = parts[1].trim();
-        if (desc.isEmpty() || by.isEmpty()) throw new LebronException("Deadline needs a description and /by.");
+        if (desc.isEmpty() || by.isEmpty()) throw new LebronException("lebron.Deadline needs a description and /by.");
         return new String[]{desc, by};
     }
 
@@ -44,7 +46,7 @@ public class Parser {
         String to = partsTo[1].trim();
 
         if (desc.isEmpty() || from.isEmpty() || to.isEmpty()) {
-            throw new LebronException("Event needs a description, /from and /to.");
+            throw new LebronException("lebron.Event needs a description, /from and /to.");
         }
         return new String[]{desc, from, to};
     }
