@@ -95,4 +95,17 @@ public class TaskList {
     public List<Task> asList() {
         return tasks;
     }
+
+    public java.util.List<Task> findMatches(String keyword) {
+        java.util.List<Task> matches = new java.util.ArrayList<>();
+        String k = keyword.toLowerCase();
+
+        for (Task t : tasks) {
+            // Uses toString so it works for Todo/Deadline/Event without extra getters
+            if (t.toString().toLowerCase().contains(k)) {
+                matches.add(t);
+            }
+        }
+        return matches;
+    }
 }

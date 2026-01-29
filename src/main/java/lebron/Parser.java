@@ -50,4 +50,23 @@ public class Parser {
         }
         return new String[]{desc, from, to};
     }
+
+    public static String parseFind(String input) throws LebronException {
+        String trimmed = input.trim();
+
+        // Command word "find" is 4 chars
+        if (trimmed.length() <= 4) {
+            throw new LebronException("Usage: find <keyword>");
+        }
+
+        String keyword = trimmed.substring(4).trim();
+        if (keyword.isEmpty()) {
+            throw new LebronException("Usage: find <keyword>");
+        }
+        return keyword;
+    }
+
+
+
+
 }
