@@ -46,7 +46,7 @@ public class FileWritingDemo {
         }
         if (t instanceof Deadline) {
             Deadline d = (Deadline) t;
-            return "D | " + done + " | " + d.name + " | " + d.by;
+            return "D | " + done + " | " + d.name + " | " + d.rawBy;
         }
         if (t instanceof Event) {
             Event e = (Event) t;
