@@ -6,7 +6,7 @@ import java.util.Scanner;
 import java.util.List;
 import java.util.ArrayList;
 
-
+// Read into Array -> Write into Array
 
 public class Lebron {
 
@@ -17,12 +17,20 @@ public class Lebron {
         System.out.println("Hello from Lebron!");
         System.out.println("Here's the current data : ");
         String filePath = "./data/lebron.txt";
+        //
         try {
             FileReadingDemo.printFileContents(filePath);
         } catch (FileNotFoundException e) {
             System.out.println("File not found, creating file for the user");
             File f = new File(filePath);
         }
+        try {
+            inputlist = FileReadingDemo.loadTasks(filePath);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found, starting with an empty list.");
+            inputlist = new ArrayList<>();
+        }
+
 
 
 
@@ -49,6 +57,11 @@ public class Lebron {
                     inputlist.get(index).mark();
                     System.out.println("Nice! I've marked this task as done:");
                     System.out.println(inputlist.get(index));
+                    try {
+                        FileWritingDemo.appendToFile(filePath, inputlist.get(index).toString());
+                    } catch (IOException e) {
+                        System.out.println("Something went wrong: " + e.getMessage());
+                    }
                 } else if (input1.startsWith("unmark")) {
                     int index = Integer.parseInt(input1.replaceAll(".*?(\\d+)$", "$1")) - 1;
                     inputlist.get(index).unmark();
@@ -62,14 +75,14 @@ public class Lebron {
                     if (name.isEmpty()) {
                         throw new LebronException("Missing Description");
                     }
-                    inputlist.add(new Todo(name));
+                    Todo newtodo = new Todo(name);
+                    inputlist.add(newtodo);
 
                     System.out.println("Got it. I've added this task:");
                     System.out.println(inputlist.get(inputlist.size() - 1));
                     System.out.println("Now you have " + inputlist.size() + " tasks in the list.");
-                    String textToAdd = "T | 0 | " + name + "\n";
                     try {
-                        FileWritingDemo.writeToFile(filePath, textToAdd);
+                        FileWritingDemo.appendToFile(filePath, newtodo.toString());
                     } catch (IOException e) {
                         System.out.println("Something went wrong: " + e.getMessage());
                     }
@@ -122,6 +135,11 @@ public class Lebron {
         }
         System.out.println("_".repeat(60));
         System.out.println("Bye. Hope to see you again soon!");
+        try {
+            FileWritingDemo.writeAllTasks(filePath, inputlist);
+        } catch (IOException e) {
+            System.out.println("Failed to save tasks: " + e.getMessage());
+        }
         System.out.println("_".repeat(60));
 
     }
