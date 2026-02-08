@@ -12,6 +12,7 @@ public class Event extends Task {
         this.to = to;
     }
 
+
     @Override
     // Override normal toString method
     public String toString() {
