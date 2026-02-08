@@ -19,6 +19,8 @@ public class Lebron {
     // Manages the list of tasks in memory
     private TaskList tasks;
 
+    private static final String DEFAULT_FILE_PATH = "data/lebron.txt";
+
     /**
      * Constructs a Lebron instance.
      * Initialises the UI, storage, and loads existing tasks from file.
@@ -37,6 +39,11 @@ public class Lebron {
             ui.showMessage("File not found, starting with an empty list.");
             tasks = new TaskList();
         }
+    }
+
+
+    public Lebron() {
+        this(DEFAULT_FILE_PATH);
     }
 
     /**
@@ -145,6 +152,14 @@ public class Lebron {
      * Creates a Lebron instance and starts the chatbot.
      */
     public static void main(String[] args) {
-        new Lebron("./data/lebron.txt").run();
+        System.out.println("Hello!");
+    }
+
+    /**
+     * Generates a response for the user's chat message.
+     */
+    public String getResponse(String input) {
+        return "Lebron heard: " + input;
     }
 }
+
