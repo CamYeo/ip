@@ -248,6 +248,8 @@ public class Lebron {
                     out.append("(No matching tasks found)");
                 }
 
+            } else if (cmd.equals("help")) {
+                return ui.getHelpMessage();
             } else {
                 throw new LebronException("No valid task was created, oh no!");
             }
