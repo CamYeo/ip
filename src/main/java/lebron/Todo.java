@@ -2,7 +2,7 @@ package lebron;
 
 public class Todo extends Task {
 
-    // Basic Contstructor
+    // Declaration statement
     public Todo(String name) {
         super(name);
     }

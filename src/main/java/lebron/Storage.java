@@ -16,6 +16,6 @@ public class Storage {
     }
 
     public void save(TaskList tasks) throws IOException {
-        FileWritingDemo.writeAllTasks(filePath, tasks.asList());  // writes arraylist into filepath
+        FileWritingDemo.writeAllTasks(filePath, tasks.asList()); // writes arraylist into filepath
     }
 }

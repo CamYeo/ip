@@ -1,8 +1,8 @@
 package lebron;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.File;
 import java.util.List;
 
 public class FileWritingDemo {
