@@ -30,10 +30,13 @@ public class Lebron {
     public Lebron(String filePath) {
         ui = new Ui();                    // Responsible for user interaction
         storage = new Storage(filePath);  // Responsible for file I/O
+        assert ui != null : "UI should be initialised";
+        assert storage != null : "Storage should be initialised";
 
         // Attempt to load tasks from storage
         try {
             tasks = new TaskList(storage.load());
+            assert tasks != null : "TaskList should not be null after loading";
         } catch (FileNotFoundException e) {
             // If the file does not exist, start with an empty task list
             ui.showMessage("File not found, starting with an empty list.");
@@ -53,6 +56,7 @@ public class Lebron {
      */
     public void run() {
         ui.showWelcome();
+        assert tasks != null : "Task list must be initialised before run()";
 
         // Main input-processing loop
         while (true) {
@@ -71,6 +75,7 @@ public class Lebron {
                 } else if (cmd.equals("mark")) {
                     // Mark a task as done
                     int idx = Parser.parseIndex(input);
+                    assert idx >= 0 && idx < tasks.size() : "Parsed index out of bounds";
                     tasks.mark(idx);
                     ui.showMessage("Nice! I've marked this task as done:");
                     ui.showMessage(tasks.get(idx).toString());
