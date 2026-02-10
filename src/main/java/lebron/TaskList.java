@@ -108,4 +108,22 @@ public class TaskList {
         }
         return matches;
     }
+
+    public String toDisplayString() {
+        if (this.size() == 0) {
+            return "Your task list is empty.";
+        }
+
+        StringBuilder sb = new StringBuilder();
+        sb.append("Here are the tasks in your list:\n");
+
+        for (int i = 0; i < this.size(); i++) {
+            sb.append(i + 1)
+                    .append(". ")
+                    .append(this.get(i))
+                    .append("\n");
+        }
+
+        return sb.toString();
+    }
 }

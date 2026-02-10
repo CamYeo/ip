@@ -159,7 +159,107 @@ public class Lebron {
      * Generates a response for the user's chat message.
      */
     public String getResponse(String input) {
-        return "Lebron heard: " + input;
+        assert input != null : "Input must not be null";
+        assert tasks != null : "Task list must be initialised before getResponse()";
+
+        try {
+            String cmd = Parser.getCommandWord(input);
+
+            StringBuilder out = new StringBuilder();
+
+            if (cmd.equals("bye")) {
+                // Save before exiting
+                try {
+                    storage.save(tasks);
+                } catch (IOException e) {
+                    return "Bye!\n(But I failed to save tasks: " + e.getMessage() + ")";
+                }
+                return "Bye! Hope to see you again soon!";
+
+            } else if (cmd.equals("list")) {
+                // Assuming Ui.showList currently prints to stdout,
+                // we should build the list string ourselves.
+                out.append(tasks.toDisplayString());
+
+            } else if (cmd.equals("mark")) {
+                int idx = Parser.parseIndex(input);
+                assert idx >= 0 && idx < tasks.size() : "Parsed index out of bounds";
+                tasks.mark(idx);
+
+                out.append("Nice! I've marked this task as done:\n")
+                        .append(tasks.get(idx));
+
+            } else if (cmd.equals("unmark")) {
+                int idx = Parser.parseIndex(input);
+                assert idx >= 0 && idx < tasks.size() : "Parsed index out of bounds";
+                tasks.unmark(idx);
+
+                out.append("OK, I've marked this task as not done yet:\n")
+                        .append(tasks.get(idx));
+
+            } else if (cmd.equals("todo")) {
+                String desc = Parser.parseTodo(input);
+                tasks.add(new Todo(desc));
+
+                out.append("Got it. I've added this task:\n")
+                        .append(tasks.get(tasks.size() - 1))
+                        .append("\nNow you have ").append(tasks.size()).append(" tasks in the list.");
+
+            } else if (cmd.equals("deadline")) {
+                String[] dd = Parser.parseDeadline(input);
+                tasks.add(new Deadline(dd[0], dd[1]));
+
+                out.append("Got it. I've added this task:\n")
+                        .append(tasks.get(tasks.size() - 1))
+                        .append("\nNow you have ").append(tasks.size()).append(" tasks in the list.");
+
+            } else if (cmd.equals("event")) {
+                String[] ev = Parser.parseEvent(input);
+                tasks.add(new Event(ev[0], ev[1], ev[2]));
+
+                out.append("Got it. I've added this task:\n")
+                        .append(tasks.get(tasks.size() - 1))
+                        .append("\nNow you have ").append(tasks.size()).append(" tasks in the list.");
+
+            } else if (cmd.equals("delete")) {
+                int idx = Parser.parseIndex(input);
+                assert idx >= 0 && idx < tasks.size() : "Parsed index out of bounds";
+                Task removed = tasks.remove(idx);
+
+                out.append("Noted, I've removed this task:\n")
+                        .append(removed)
+                        .append("\nNow you have ").append(tasks.size()).append(" tasks in the list.");
+
+            } else if (cmd.equals("find")) {
+                String keyword = Parser.parseFind(input);
+                java.util.List<Task> matches = tasks.findMatches(keyword);
+
+                out.append("Here are the matching tasks in your list:\n");
+                for (int i = 0; i < matches.size(); i++) {
+                    out.append(i + 1).append(". ").append(matches.get(i)).append("\n");
+                }
+
+                if (matches.isEmpty()) {
+                    out.append("(No matching tasks found)");
+                }
+
+            } else {
+                throw new LebronException("No valid task was created, oh no!");
+            }
+
+            // Save after every successful command (GUI-friendly)
+            try {
+                storage.save(tasks);
+            } catch (IOException e) {
+                out.append("\n(Warning: failed to save tasks: ").append(e.getMessage()).append(")");
+            }
+
+            return out.toString();
+
+        } catch (LebronException e) {
+            return e.getMessage();
+        }
     }
+
 }
 
