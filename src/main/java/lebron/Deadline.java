@@ -22,13 +22,13 @@ public class Deadline extends Task {
      * This value may be {@code null} if the user's input cannot be
      * converted into a valid date-time.
      */
-    protected LocalDateTime by;
+    private LocalDateTime by;
 
     /**
      * The original deadline string entered by the user.
      * This is used for display and storage when parsing fails.
      */
-    protected String rawBy;
+    private String rawBy;
 
     /**
      * Constructs a {@code Deadline} task with the given description
@@ -41,6 +41,24 @@ public class Deadline extends Task {
         super(description);
         this.rawBy = rawBy;
         this.by = parseBy(rawBy);
+    }
+
+    /**
+     * Returns the parsed deadline as a LocalDateTime.
+     *
+     * @return The parsed deadline, or null if parsing failed
+     */
+    public LocalDateTime getBy() {
+        return by;
+    }
+
+    /**
+     * Returns the raw deadline string entered by the user.
+     *
+     * @return The raw deadline string
+     */
+    public String getRawBy() {
+        return rawBy;
     }
 
     /**
@@ -66,28 +84,25 @@ public class Deadline extends Task {
         try {
             LocalDate d = LocalDate.parse(raw);
             return d.atTime(LocalTime.of(23, 59));
-        } catch (DateTimeParseException ignored) { }
+        } catch (DateTimeParseException e) {
+            // Ignore and try next format
+        }
 
         // d/M/yyyy HHmm → exact date and time
         try {
             DateTimeFormatter f = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
             return LocalDateTime.parse(raw, f);
-        } catch (DateTimeParseException ignored) { }
+        } catch (DateTimeParseException e) {
+            // Ignore - unable to parse
+        }
 
         return null; // unable to parse deadline
     }
 
-    /**
-     * Returns a string representation suitable for saving to a file.
-     * <p>
-     * If the deadline was successfully parsed, the parsed date-time
-     * is saved. Otherwise, the original raw input is preserved.
-     *
-     * @return Storage-friendly string representation of this task
-     */
+    @Override
     public String toStorageString() {
-        String byStr = (by == null) ? rawBy : by.toString();
-        return "D | " + status + " | " + name + " | " + byStr;
+        String byStr = (by == null) ? rawBy : rawBy;
+        return "D | " + (isDone() ? "1" : "0") + " | " + getName() + " | " + byStr;
     }
 
     /**

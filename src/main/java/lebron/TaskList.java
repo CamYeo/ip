@@ -96,6 +96,13 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Finds all tasks that match the given keyword.
+     * The search is case-insensitive and matches against the full string representation of tasks.
+     *
+     * @param keyword The keyword to search for
+     * @return List of tasks containing the keyword
+     */
     public java.util.List<Task> findMatches(String keyword) {
         java.util.List<Task> matches = new java.util.ArrayList<>();
         String k = keyword.toLowerCase();
@@ -109,6 +116,12 @@ public class TaskList {
         return matches;
     }
 
+    /**
+     * Returns a formatted string representation of all tasks in the list.
+     * If the list is empty, returns a message indicating so.
+     *
+     * @return Formatted string showing all tasks with numbers
+     */
     public String toDisplayString() {
         if (this.size() == 0) {
             return "Your task list is empty.";
