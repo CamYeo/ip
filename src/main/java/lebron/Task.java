@@ -1,30 +1,71 @@
 package lebron;
 
+/**
+ * Represents a task with a description and completion status.
+ * This is the base class for all task types (Todo, Deadline, Event).
+ */
 public class Task {
-    String name;
-    int status;
+    private String name;
+    private boolean isDone;
 
+    /**
+     * Constructs a new Task with the given name.
+     * The task is initially marked as not done.
+     *
+     * @param name The description of the task
+     */
     public Task(String name) {
         this.name = name;
-        this.status = 0;
+        this.isDone = false;
     }
 
-    // Uses status 1 and 0 to Mark Status
+    /**
+     * Returns the name/description of this task.
+     *
+     * @return The task description
+     */
+    public String getName() {
+        return name;
+    }
+
+    /**
+     * Returns whether this task is marked as done.
+     *
+     * @return true if the task is done, false otherwise
+     */
+    public boolean isDone() {
+        return isDone;
+    }
+
+    /**
+     * Marks this task as done.
+     */
     public void mark() {
-        this.status = 1;
+        this.isDone = true;
     }
 
+    /**
+     * Marks this task as not done.
+     */
     public void unmark() {
-        this.status = 0;
+        this.isDone = false;
     }
 
+    /**
+     * Returns a string representation suitable for saving to storage.
+     * Subclasses should override this method to include their specific data.
+     *
+     * @return Storage format string
+     */
+    public String toStorageString() {
+        return (isDone ? "1" : "0") + " | " + name;
+    }
 
     @Override
     public String toString() {
-        if (status == 1) {
+        if (isDone) {
             return "[X] " + this.name;
-        }
-        else {
+        } else {
             return "[ ] " + this.name;
         }
     }

@@ -1,0 +1,195 @@
+/* ============================================
+   LEBRON - Modern Chat UI Stylesheet
+   A sleek, professional design with smooth animations
+   ============================================ */
+
+/* === ROOT COLOR PALETTE === */
+.root {
+    /* Main Colors */
+    -fx-primary: #6C5CE7;
+    -fx-primary-dark: #5443c7;
+    -fx-secondary: #00B894;
+    -fx-accent: #FDCB6E;
+
+    /* Backgrounds */
+    -fx-bg-dark: #1E1E2E;
+    -fx-bg-darker: #181825;
+    -fx-bg-light: #2A2A3E;
+    -fx-bg-lighter: #363650;
+
+    /* Text Colors */
+    -fx-text-primary: #E8E8F0;
+    -fx-text-secondary: #A0A0B5;
+    -fx-text-muted: #6E6E85;
+
+    /* Status Colors */
+    -fx-success: #00B894;
+    -fx-error: #FF7675;
+    -fx-warning: #FDCB6E;
+    -fx-info: #74B9FF;
+}
+
+/* === MAIN WINDOW === */
+.anchor-pane {
+    -fx-background-color: -fx-bg-darker;
+}
+
+/* === SCROLL PANE === */
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-background: -fx-bg-dark;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: -fx-bg-dark;
+}
+
+.scroll-pane .scroll-bar:vertical {
+    -fx-background-color: transparent;
+    -fx-opacity: 0.5;
+    -fx-pref-width: 8px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: -fx-bg-lighter;
+    -fx-background-radius: 4px;
+}
+
+.scroll-pane .scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -fx-primary;
+}
+
+.scroll-pane .scroll-bar .increment-button,
+.scroll-pane .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 0;
+}
+
+/* === DIALOG CONTAINER === */
+#dialogContainer {
+    -fx-background-color: -fx-bg-dark;
+    -fx-padding: 20px 15px;
+    -fx-spacing: 15px;
+}
+
+/* === DIALOG BOX === */
+.dialog-box {
+    -fx-background-color: transparent;
+    -fx-spacing: 12px;
+}
+
+/* === CHAT BUBBLES === */
+.label {
+    -fx-background-color: -fx-bg-light;
+    -fx-background-radius: 18px;
+    -fx-padding: 12px 18px;
+    -fx-text-fill: -fx-text-primary;
+    -fx-font-family: "SF Pro Display", "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-line-spacing: 2px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.15), 8, 0, 0, 2);
+    -fx-wrap-text: true;
+}
+
+/* User Messages - Right side, primary color */
+.user-label {
+    -fx-background-color: linear-gradient(to right, -fx-primary-dark, -fx-primary);
+    -fx-text-fill: white;
+    -fx-font-weight: 500;
+}
+
+/* Bot Messages - Left side, dark background */
+.bot-label {
+    -fx-background-color: -fx-bg-lighter;
+    -fx-text-fill: -fx-text-primary;
+}
+
+/* === AVATAR IMAGES === */
+.image-view {
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 2);
+}
+
+/* === INPUT AREA === */
+#userInput {
+    -fx-background-color: -fx-bg-light;
+    -fx-text-fill: -fx-text-primary;
+    -fx-prompt-text-fill: -fx-text-muted;
+    -fx-font-family: "SF Pro Display", "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-padding: 12px 16px;
+    -fx-border-color: transparent;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.1), 5, 0, 0, 1);
+}
+
+#userInput:focused {
+    -fx-background-color: -fx-bg-lighter;
+    -fx-border-color: -fx-primary;
+    -fx-border-width: 0 0 2px 0;
+}
+
+/* === SEND BUTTON === */
+#sendButton {
+    -fx-background-color: linear-gradient(to bottom, -fx-primary, -fx-primary-dark);
+    -fx-text-fill: white;
+    -fx-font-family: "SF Pro Display", "Segoe UI", "Roboto", sans-serif;
+    -fx-font-size: 14px;
+    -fx-font-weight: 600;
+    -fx-border-width: 0;
+    -fx-background-radius: 0;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.3), 10, 0, 0, 2);
+}
+
+#sendButton:hover {
+    -fx-background-color: linear-gradient(to bottom, -fx-primary-dark, #4433a7);
+    -fx-effect: dropshadow(gaussian, rgba(108, 92, 231, 0.5), 15, 0, 0, 3);
+    -fx-scale-y: 1.02;
+}
+
+#sendButton:pressed {
+    -fx-background-color: #4433a7;
+    -fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+    -fx-scale-y: 0.98;
+}
+
+/* === WELCOME MESSAGE === */
+.welcome-label {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-text-secondary;
+    -fx-font-size: 13px;
+    -fx-font-style: italic;
+    -fx-padding: 10px 20px;
+    -fx-effect: none;
+}
+
+/* === STATUS INDICATORS === */
+.status-success {
+    -fx-text-fill: -fx-success;
+}
+
+.status-error {
+    -fx-text-fill: -fx-error;
+}
+
+.status-warning {
+    -fx-text-fill: -fx-warning;
+}
+
+/* === SMOOTH ANIMATIONS === */
+.animated {
+    -fx-transition: all 0.3s ease;
+}
+
+/* === CUSTOM SCROLLBAR === */
+.scroll-bar:vertical .track {
+    -fx-background-color: transparent;
+    -fx-background-radius: 4px;
+}
+
+/* === SELECTION COLORS === */
+.text-input:focused {
+    -fx-highlight-fill: -fx-primary;
+    -fx-highlight-text-fill: white;
+}

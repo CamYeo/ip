@@ -45,12 +45,32 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        // Apply bot styling
+        dialog.getStyleClass().clear();
+        dialog.getStyleClass().add("bot-label");
     }
 
+    /**
+     * Creates a user dialog box with user styling.
+     *
+     * @param text The user's message
+     * @param img The user's avatar image
+     * @return A styled DialogBox for the user
+     */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.dialog.getStyleClass().clear();
+        db.dialog.getStyleClass().add("user-label");
+        return db;
     }
 
+    /**
+     * Creates a bot dialog box with bot styling.
+     *
+     * @param text The bot's response
+     * @param img The bot's avatar image
+     * @return A styled DialogBox for the bot
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
