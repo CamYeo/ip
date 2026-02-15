@@ -7,6 +7,44 @@ package lebron;
 public class Parser {
 
     /**
+     * Parses user input and returns the corresponding Command object.
+     *
+     * @param input The user's input string
+     * @return The Command object representing the parsed command
+     * @throws LebronException If the command is invalid or cannot be parsed
+     */
+    public static Command parse(String input) throws LebronException {
+        String cmd = getCommandWord(input);
+
+        switch (cmd) {
+        case "bye":
+            return new ByeCommand();
+        case "list":
+            return new ListCommand();
+        case "mark":
+            return new MarkCommand(parseIndex(input));
+        case "unmark":
+            return new UnmarkCommand(parseIndex(input));
+        case "todo":
+            return new TodoCommand(parseTodo(input));
+        case "deadline":
+            String[] dd = parseDeadline(input);
+            return new DeadlineCommand(dd[0], dd[1]);
+        case "event":
+            String[] ev = parseEvent(input);
+            return new EventCommand(ev[0], ev[1], ev[2]);
+        case "delete":
+            return new DeleteCommand(parseIndex(input));
+        case "find":
+            return new FindCommand(parseFind(input));
+        case "help":
+            return new HelpCommand();
+        default:
+            throw new LebronException("I'm sorry, but I don't know what that means.");
+        }
+    }
+
+    /**
      * Extracts the command word from user input.
      * The command word is the first word in the input string.
      *
