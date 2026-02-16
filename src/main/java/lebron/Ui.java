@@ -81,13 +81,13 @@ public class Ui {
               Add a todo task
               Example: todo read book
 
-            deadline <description> /by <date>
+            deadline <description> by <date>
               Add a deadline task
-              Example: deadline submit report /by Friday
+              Example: deadline submit report by Friday
 
-            event <description> /from <start> /to <end>
+            event <description> from <start> to <end>
               Add an event task
-              Example: event meeting /from 2pm /to 4pm
+              Example: event meeting from 2pm to 4pm
 
             mark <task number>
             unmark <task number>

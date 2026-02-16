@@ -55,10 +55,17 @@ public class ParserTest {
 
     @Test
     public void parseDeadline_validInput_returnsArray() throws LebronException {
+        // Legacy format with /by
         String[] result = Parser.parseDeadline("deadline return book /by Monday");
         assertEquals(2, result.length);
         assertEquals("return book", result[0]);
         assertEquals("Monday", result[1]);
+
+        // Intuitive format without /
+        String[] result2 = Parser.parseDeadline("deadline return book by Monday");
+        assertEquals(2, result2.length);
+        assertEquals("return book", result2[0]);
+        assertEquals("Monday", result2[1]);
     }
 
     @Test
@@ -79,11 +86,19 @@ public class ParserTest {
 
     @Test
     public void parseEvent_validInput_returnsArray() throws LebronException {
+        // Legacy format with /from and /to
         String[] result = Parser.parseEvent("event meeting /from 2pm /to 4pm");
         assertEquals(3, result.length);
         assertEquals("meeting", result[0]);
         assertEquals("2pm", result[1]);
         assertEquals("4pm", result[2]);
+
+        // Intuitive format without /
+        String[] result2 = Parser.parseEvent("event meeting from 2pm to 4pm");
+        assertEquals(3, result2.length);
+        assertEquals("meeting", result2[0]);
+        assertEquals("2pm", result2[1]);
+        assertEquals("4pm", result2[2]);
     }
 
     @Test
