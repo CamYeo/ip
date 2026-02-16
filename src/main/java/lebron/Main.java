@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Lebron using FXML.
  */
 public class Main extends Application {
 
@@ -23,7 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Lebron Chat");
-            fxmlLoader.<MainWindow>getController().setDuke(lebron); // inject the Lebron instance
+            fxmlLoader.<MainWindow>getController().setLebron(lebron); // inject the Lebron instance
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

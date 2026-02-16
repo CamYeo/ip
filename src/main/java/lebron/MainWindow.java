@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private Lebron lebron;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image lebronImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
      * Initializes the controller and sets up the UI.
@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
                 + "Type 'help' to see all available commands, or just start adding your first task!";
 
         Platform.runLater(() -> {
-            DialogBox welcomeDialog = DialogBox.getDukeDialog(welcomeText, dukeImage);
+            DialogBox welcomeDialog = DialogBox.getLebronDialog(welcomeText, lebronImage);
             dialogContainer.getChildren().add(welcomeDialog);
 
             // Add fade-in animation
@@ -70,7 +70,7 @@ public class MainWindow extends AnchorPane {
      *
      * @param l The Lebron chatbot instance
      */
-    public void setDuke(Lebron l) {
+    public void setLebron(Lebron l) {
         lebron = l;
     }
 
@@ -88,7 +88,7 @@ public class MainWindow extends AnchorPane {
         String response = lebron.getResponse(input);
 
         DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
-        DialogBox botDialog = DialogBox.getDukeDialog(response, dukeImage);
+        DialogBox botDialog = DialogBox.getLebronDialog(response, lebronImage);
 
         dialogContainer.getChildren().addAll(userDialog, botDialog);
 
