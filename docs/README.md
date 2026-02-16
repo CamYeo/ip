@@ -1,7 +1,6 @@
 # Lebron User Guide
 
-<!-- Replace 'YOUR_USERNAME' with your actual GitHub username for the image to display -->
-![Lebron Chatbot](https://raw.githubusercontent.com/YOUR_USERNAME/ip/master/src/main/resources/images/DaDuke.png)
+![Lebron Chatbot](https://camyeo.github.io/ip/Ui.png)
 
 **Lebron** is a personal task management chatbot that helps you keep track of your todos, deadlines, and events. It's simple, fast, and works via a clean graphical interface.
 
