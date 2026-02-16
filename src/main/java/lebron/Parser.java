@@ -77,22 +77,34 @@ public class Parser {
 
     /**
      * Parses a deadline command to extract description and due date.
-     * Expected format: "deadline DESCRIPTION /by DATE"
+     * Supports formats:
+     * - "deadline DESCRIPTION by DATE" (intuitive)
+     * - "deadline DESCRIPTION /by DATE" (legacy)
      *
      * @param input The full deadline command string
      * @return Array with [description, date] where both are trimmed
      * @throws LebronException If the format is invalid or fields are empty
      */
     public static String[] parseDeadline(String input) throws LebronException {
-        // "deadline <desc> /by <by>"
-        String[] parts = input.substring(9).split("/by", 2);
+        String content = input.substring(9).trim();
+
+        // Try "/by" first (legacy format), then " by " (intuitive format)
+        String[] parts;
+        if (content.contains("/by")) {
+            parts = content.split("/by", 2);
+        } else if (content.toLowerCase().contains(" by ")) {
+            parts = content.split("(?i) by ", 2);
+        } else {
+            throw new LebronException("Usage: deadline <description> by <date>");
+        }
+
         if (parts.length < 2) {
-            throw new LebronException("Usage: deadline <desc> /by <date>");
+            throw new LebronException("Usage: deadline <description> by <date>");
         }
         String desc = parts[0].trim();
         String by = parts[1].trim();
         if (desc.isEmpty() || by.isEmpty()) {
-            throw new LebronException("lebron.Deadline needs a description and /by.");
+            throw new LebronException("Deadline needs a description and a date.");
         }
         return new String[]{desc, by};
     }
@@ -115,31 +127,47 @@ public class Parser {
 
     /**
      * Parses an event command to extract description, start time, and end time.
-     * Expected format: "event DESCRIPTION /from START /to END"
+     * Supports formats:
+     * - "event DESCRIPTION from START to END" (intuitive)
+     * - "event DESCRIPTION /from START /to END" (legacy)
      *
      * @param input The full event command string
      * @return Array with [description, from, to] where all are trimmed
      * @throws LebronException If the format is invalid or any field is empty
      */
     public static String[] parseEvent(String input) throws LebronException {
-        // "event <desc> /from <from> /to <to>"
-        String without = input.substring(6);
-        String[] partsFrom = without.split("/from", 2);
-        if (partsFrom.length < 2) {
-            throw new LebronException("Usage: event <desc> /from <start> /to <end>");
+        String content = input.substring(6).trim();
+
+        String[] partsFrom;
+        String[] partsTo;
+        boolean useLegacy = content.contains("/from");
+
+        if (useLegacy) {
+            // Legacy format: /from ... /to
+            partsFrom = content.split("/from", 2);
+            if (partsFrom.length < 2) {
+                throw new LebronException("Usage: event <description> from <start> to <end>");
+            }
+            partsTo = partsFrom[1].split("/to", 2);
+        } else {
+            // Intuitive format: from ... to
+            partsFrom = content.split("(?i) from ", 2);
+            if (partsFrom.length < 2) {
+                throw new LebronException("Usage: event <description> from <start> to <end>");
+            }
+            partsTo = partsFrom[1].split("(?i) to ", 2);
+        }
+
+        if (partsTo.length < 2) {
+            throw new LebronException("Usage: event <description> from <start> to <end>");
         }
 
         String desc = partsFrom[0].trim();
-        String[] partsTo = partsFrom[1].split("/to", 2);
-        if (partsTo.length < 2) {
-            throw new LebronException("Usage: event <desc> /from <start> /to <end>");
-        }
-
         String from = partsTo[0].trim();
         String to = partsTo[1].trim();
 
         if (desc.isEmpty() || from.isEmpty() || to.isEmpty()) {
-            throw new LebronException("lebron.Event needs a description, /from and /to.");
+            throw new LebronException("Event needs a description, start time, and end time.");
         }
         return new String[]{desc, from, to};
     }
