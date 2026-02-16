@@ -71,7 +71,7 @@ public class DialogBox extends HBox {
      * @param img The bot's avatar image
      * @return A styled DialogBox for the bot
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getLebronDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;
